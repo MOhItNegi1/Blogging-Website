@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align:center;">Login</h2>
+<form method="POST" style="max-width:350px;margin:2rem auto;padding:2rem;background:rgba(247,247,247,0.8);border-radius:20px;box-shadow:0 2px 16px 4px rgba(0,0,0,0.08);backdrop-filter:blur(8px);" id="loginForm">
+    <div style="margin-bottom:1rem;">
+        <label for="role" style="display:block;margin-bottom:0.5rem;">Role:</label>
+        <select id="role" name="role" required style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:12px;">
+            <option value="visitor">Visitor</option>
+            <option value="publisher">Publisher</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+    <div id="userFields">
+        <div style="margin-bottom:1rem;">
+            <label for="username" style="display:block;margin-bottom:0.5rem;">Username:</label>
+            <input type="text" id="username" name="username" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:12px;">
+        </div>
+        <div style="margin-bottom:1rem;">
+            <label for="password" style="display:block;margin-bottom:0.5rem;">Password:</label>
+            <input type="password" id="password" name="password" style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:12px;">
+        </div>
+    </div>
+    <button type="submit" style="width:100%;padding:0.75rem;background:#222;color:#ffd700;border:none;border-radius:12px;font-weight:bold;cursor:pointer;">
+        Login
+    </button>
+</form>
+<script>
+    const roleSelect = document.getElementById('role');
+    const userFields = document.getElementById('userFields');
+    function toggleFields() {
+        if (roleSelect.value === 'visitor') {
+            userFields.style.display = 'none';
+            // Remove required attribute for visitor
+            document.getElementById('username').required = false;
+            document.getElementById('password').required = false;
+        } else {
+            userFields.style.display = '';
+            document.getElementById('username').required = true;
+            document.getElementById('password').required = true;
+        }
+    }
+    roleSelect.addEventListener('change', toggleFields);
+    window.onload = toggleFields;
+</script>
+{% endblock %}

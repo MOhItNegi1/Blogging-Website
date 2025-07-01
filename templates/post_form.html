@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="text-align:center;">{{ post and 'Edit' or 'New' }} Post</h2>
+<form method="POST" style="max-width:500px;margin:2rem auto;padding:2rem;background:#f7f7f7;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+    <div style="margin-bottom:1rem;">
+        <label for="title" style="display:block;margin-bottom:0.5rem;">Title:</label>
+        <input type="text" id="title" name="title" value="{{ post.title if post else '' }}" required
+               style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:4px;">
+    </div>
+    <div style="margin-bottom:1rem;">
+        <label for="body" style="display:block;margin-bottom:0.5rem;">Body:</label>
+        <textarea id="body" name="body" rows="8" required
+                  style="width:100%;padding:0.5rem;border:1px solid #ccc;border-radius:4px;">{{ post.body if post else '' }}</textarea>
+    </div>
+    <div style="margin-bottom:1rem;">
+        <label>
+            <input type="checkbox" name="is_published" {% if post and post.is_published %}checked{% endif %}>
+            Publish now
+        </label>
+    </div>
+    <button type="submit"
+            style="width:100%;padding:0.75rem;background:#222;color:#ffd700;border:none;border-radius:4px;font-weight:bold;cursor:pointer;">
+        Submit
+    </button>
+</form>
+{% endblock %}
